@@ -9,7 +9,20 @@ function getJokes(e){
 
     xhr.onload = function(){
         if(this.status === 200){
-            console.log(this.responseText);
+            const jokes = JSON.parse(this.responseText);
+
+            console.log(jokes);
+            let output = "";
+
+            if(jokes.type === "success"){
+                jokes.value.forEach(function(joke){
+                    output += `
+                        <li>${joke.joke}</l1>
+                    `
+                });
+
+                document.getElementById("get-jokes").innerHTML = output;
+            }
         }
     }
 
@@ -17,3 +30,4 @@ function getJokes(e){
 
     e.preventDefault();
 }
+
